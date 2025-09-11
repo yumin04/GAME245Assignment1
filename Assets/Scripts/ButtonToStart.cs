@@ -4,21 +4,11 @@ public class ButtonToStart : MonoBehaviour
 {
     public GameObject startScreen;
     public GameObject gameScreen;
-
-    void Start()
+    
+    public void SwitchScreens()
     {
-
-
-
-        void SwitchScreens()
-        {
-            startScreen.SetActive(false);
-            gameScreen.SetActive(true);
+        startScreen.SetActive(false);
+        gameScreen.SetActive(true);
             
-        }
-
-
-
-
     }
 }
