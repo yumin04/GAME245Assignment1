@@ -14,7 +14,7 @@ public class ButtonToStart : MonoBehaviour
         {
             startScreen.SetActive(false);
             gameScreen.SetActive(true);
-
+            
         }
 
 
