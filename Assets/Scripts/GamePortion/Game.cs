@@ -2,24 +2,20 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    private static IGame _instance;
+    private static Game _instance;
+    public GameMediator  _gameMediator;
 
-    public static IGame GetInstance()
+    public static Game GetInstance()
     {
         return _instance;
     }
-
-    public void SetInstance(IGame instance)
+    public void SetMediator(GameMediator gameMediator)
     {
-        _instance = instance;
+        _gameMediator = gameMediator;
     }
 
-    public void StartLogic()
+    public GameMediator GetMediator()
     {
-        _instance.StartLogic();
-    }
-    public void EndLogic()
-    {
-        _instance.EndLogic();
+        return _gameMediator;
     }
 }
