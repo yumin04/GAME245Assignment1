@@ -61,6 +61,6 @@ public class GameMediator : MonoBehaviour
     }
     public void QuitButtonClicked()
     {
-        Application.Quit();
+        Game.GetInstance().QuitApplication();
     }
 }

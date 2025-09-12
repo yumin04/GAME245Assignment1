@@ -10,12 +10,12 @@ public class Countdown : MonoBehaviour
 
     public void StartGameTimer()
     {
-        StartCoroutine(this.RunTimer(2));
+        StartCoroutine(this.RunTimer(5));
     }
 
     public void StartRoundTimer()
     {
-        StartCoroutine(this.RunTimer(4));
+        StartCoroutine(this.RunTimer(10));
     }
     public IEnumerator RunTimer(int maximumTime)
     {
