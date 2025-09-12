@@ -20,12 +20,11 @@ public class GameMediator : MonoBehaviour
     }
     public void ChangeInTime(int currTime)
     {
+        UI.GetInstance().ChangeCountdownText(currTime);
         if (currTime == 0)
         {
             Game.GetInstance().CheckIfQuestionLeft();
         }
-
-        UI.GetInstance().ChangeCountdownText(currTime);
     }
 
     public void AnswerButtonClicked(int i)
@@ -37,20 +36,23 @@ public class GameMediator : MonoBehaviour
     
     public void StartButtonClicked()
     {
+        UI.GetInstance().EnableCounterText();
         _countdown.StartGameTimer();
     }
     public void RestartButtonClicked()
     {
+        _countdown.EndTimer();
         Game.GetInstance().Reset();
     }
 
     // Inside ProcessAnswer in Game Class, it will recall GenerateNextQuestion() or EndGame()
     public void GenerateNextQuestion()
     {            
-        (int x, int y, int answer1, int answer2, int answer3) = questionGenerator.GetNextQuestion();
-        _countdown.StartRoundTimer();
         UI.GetInstance().DisplayGameScreen();
+        (int x, int y, int answer1, int answer2, int answer3) = questionGenerator.GetNextQuestion();
         UI.GetInstance().MoveToNextQuestion(x, y, answer1, answer2, answer3);
+        _countdown.StartRoundTimer();
+
     }
     
     public void EndGame(int questionsCorrect)

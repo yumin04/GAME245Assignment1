@@ -75,8 +75,11 @@ public class UI : MonoBehaviour
     public void OnClickRestartButton()
     {
         DisplayStartScreen();
+        DisableCounterText();
         _gameMediator.RestartButtonClicked();   
     }
+
+
     public void DisplayStartScreen()
     {
         currentScreen = CurrentScreen.StartScreen;
@@ -107,7 +110,7 @@ public class UI : MonoBehaviour
             endScreen.SetActive(true);
         }
     }
-
+    
 
 
     public void MoveToNextQuestion(int x, int y, int answer1, int answer2, int answer3)
@@ -123,5 +126,15 @@ public class UI : MonoBehaviour
         currentScreen = CurrentScreen.EndScreen;
         DisplayScreen();
         resultText.text = "Result: " + questionsCorrect + " / 3";
+    }
+
+    public void EnableCounterText()
+    {
+        startScreenCountdownText.gameObject.SetActive(true);        
+    }
+    
+    private void DisableCounterText()
+    {
+        startScreenCountdownText.gameObject.SetActive(false);
     }
 }
