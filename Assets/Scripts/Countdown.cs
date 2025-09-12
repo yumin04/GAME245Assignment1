@@ -4,19 +4,9 @@ using UnityEngine;
 public class Countdown : MonoBehaviour
 {
     [SerializeField]
-    private ITimer _timer;
     
     private GameMediator _gameMediator;
-
-    public void Awake()
-    {
-        _timer.SetMediator(this);
-    }
-    public void SetTimer(ITimer timer)
-    {
-        _timer = timer;
-        _timer.SetMediator(this);
-    }
+    
 
     public void StartGameTimer()
     {
@@ -37,7 +27,7 @@ public class Countdown : MonoBehaviour
         _gameMediator.ChangeInTime(0);
     }
 
-    public void EndTImer()
+    public void EndTimer()
     {
         StopAllCoroutines();
     }

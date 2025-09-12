@@ -6,57 +6,57 @@ public class GameMediator : MonoBehaviour
     // UI is also going to be singleton
     [SerializeField]
     private Countdown _countdown;
+    
+    [SerializeField]
+    private QuestionGenerator questionGenerator;
 
     private int currScreen = 0;
     // startScreen, gameScreen (Can be Enum)
     public void Awake()
     {
-        //UI.GetInstance().SetMediator(this)
+        UI.GetInstance().SetMediator(this);
         _countdown.SetMediator(this);        
         Game.GetInstance().SetMediator(this);
     }
-    public void ChangeInTime(int i)
+    public void ChangeInTime(int currTime)
     {
-        if (i == 0)
+        if (currTime == 0)
         {
-            //UI.GetInstance().DisplayTimeEnd(currScreen)
-            //Game.GetInstance().ProcessTimeEnd(currScreen)
+            Game.GetInstance().CheckIfQuestionLeft();
         }
-        // UI.GetInstance().ChangeStartCountDownText()
-        // UI.GetInstance().ChangeRoundCountDownText()
+
+        UI.GetInstance().ChangeCountdownText(currTime);
     }
 
     public void AnswerButtonClicked(int i)
     {
-        // int x, int y, int correctNumber = questionGenerator.GetAnswerChoice(i)
-        // _countdown.EndTimer();
-        // Game.GetInstance().ProcessAnswer(x, y, answerChoice)
+        bool isCorrect = questionGenerator.CheckForCorrectAnswer(i);
+        _countdown.EndTimer();
+        Game.GetInstance().ProcessAnswer(isCorrect);
     }
-
-
-
+    
     public void StartButtonClicked()
     {
-        // UI.GetInstance().DisplayGameScreen()
-        // GenerateNextQuestion()
+        _countdown.StartGameTimer();
     }
     public void RestartButtonClicked()
     {
-        // Game.GetInstance().Reset()
-        // UI.GetInstance().DisplayStartScreen()
+        Game.GetInstance().Reset();
     }
 
     // Inside ProcessAnswer in Game Class, it will recall GenerateNextQuestion() or EndGame()
     public void GenerateNextQuestion()
-    {
-        // int x, int y, int answer1, int answer2, int answer3 = questionGenerator.GetNextQuestion(i)
-        // _countdown.StartTimer()
-        // UI.GetInstance().MoveToNextQuestion(x, y, answer1, answer2, answer3)
+    {            
+        (int x, int y, int answer1, int answer2, int answer3) = questionGenerator.GetNextQuestion();
+        _countdown.StartRoundTimer();
+        UI.GetInstance().DisplayGameScreen();
+        UI.GetInstance().MoveToNextQuestion(x, y, answer1, answer2, answer3);
     }
     
     public void EndGame(int questionsCorrect)
     {
-        // UI.GetInstance().DisplayFinalScreen(questionsCorrect)
+        Debug.Log("End Game Called");
+        UI.GetInstance().DisplayEndScreen(questionsCorrect);
     }
     public void QuitButtonClicked()
     {
