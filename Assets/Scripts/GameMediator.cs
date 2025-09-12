@@ -55,7 +55,6 @@ public class GameMediator : MonoBehaviour
     
     public void EndGame(int questionsCorrect)
     {
-        Debug.Log("End Game Called");
         UI.GetInstance().DisplayEndScreen(questionsCorrect);
     }
     public void QuitButtonClicked()

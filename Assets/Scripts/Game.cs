@@ -34,7 +34,6 @@ public class Game : MonoBehaviour
         }
         else
         {
-            Debug.Log("question correct: "  + questionCorrect);
             _gameMediator.EndGame(questionCorrect);
         }
     }
