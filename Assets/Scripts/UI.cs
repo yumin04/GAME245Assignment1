@@ -21,6 +21,9 @@ public class UI : MonoBehaviour
     public GameObject startScreen;
     public GameObject gameScreen;
     public GameObject endScreen;
+
+
+    public Button startButton;
     
     public TextMeshProUGUI startScreenCountdownText;
     public TextMeshProUGUI gameScreenCountdownText;
@@ -66,6 +69,7 @@ public class UI : MonoBehaviour
     
     public void OnClickStartButton()
     {
+        DisableStartButton();
         _gameMediator.StartButtonClicked();
     }
     public void OnClickQuitButton()
@@ -76,7 +80,7 @@ public class UI : MonoBehaviour
     {
         DisplayStartScreen();
         DisableCounterText();
-        _gameMediator.RestartButtonClicked();   
+        _gameMediator.RestartButtonClicked();
     }
 
 
@@ -136,5 +140,10 @@ public class UI : MonoBehaviour
     private void DisableCounterText()
     {
         startScreenCountdownText.gameObject.SetActive(false);
+    }
+
+    public void DisableStartButton()
+    {
+        startButton.gameObject.SetActive(false);
     }
 }

@@ -272,7 +272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &192615491
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2450,6 +2450,7 @@ MonoBehaviour:
   startScreen: {fileID: 192615490}
   gameScreen: {fileID: 282801773}
   endScreen: {fileID: 1625774066}
+  startButton: {fileID: 974574890}
   startScreenCountdownText: {fileID: 375779496}
   gameScreenCountdownText: {fileID: 1184209649}
   problemText: {fileID: 571648763}
@@ -2862,7 +2863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1625774067
 RectTransform:
   m_ObjectHideFlags: 0

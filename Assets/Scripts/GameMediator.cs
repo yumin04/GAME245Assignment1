@@ -37,12 +37,14 @@ public class GameMediator : MonoBehaviour
     public void StartButtonClicked()
     {
         UI.GetInstance().EnableCounterText();
+        UI.GetInstance().DisableStartButton();
         _countdown.StartGameTimer();
     }
     public void RestartButtonClicked()
     {
         _countdown.EndTimer();
         Game.GetInstance().Reset();
+        StartButtonClicked();
     }
 
     // Inside ProcessAnswer in Game Class, it will recall GenerateNextQuestion() or EndGame()
