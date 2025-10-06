@@ -53,7 +53,15 @@ public class Achievements : MonoBehaviour {
 
     }
 
-    private void TrackThatWasClose(int timeRemaining) {
+    private void TrackThatWasClose(int timeRemaining)
+    {
+        if (timeRemaining > 3) return;
+        if (AchievementIsUnlocked("thatwasclose"))
+        {
+            Debug.Log("Achievement 'That was Close!' was already unlocked.");
+            return;
+        }
+        UnlockAchievement("thatwasclose");
         
     }
 
