@@ -5,7 +5,7 @@ public class Achievements : MonoBehaviour {
     // tracks all of the achievement IDs and their progress
     private Dictionary<string, AchievementProgress> achievementProgressTable;
     private void Awake() {
-        AchievementEvents.OnRoundComplete += OnRoundComplete;
+        AchievementEvents.OnGameComplete += OnRoundComplete;
         AchievementEvents.OnAchievementEarned += OnAchievementEarned;
         AchievementEvents.OnEquationClicked += OnEquationClicked;
         AchievementEvents.OnAnswerQuestionCorrectly += OnAnswerQuestionCorrectly;
@@ -13,7 +13,7 @@ public class Achievements : MonoBehaviour {
     }
     
     private void OnDestroy() {
-        AchievementEvents.OnRoundComplete -= OnRoundComplete;
+        AchievementEvents.OnGameComplete -= OnRoundComplete;
         AchievementEvents.OnAchievementEarned -= OnAchievementEarned;
         AchievementEvents.OnEquationClicked -= OnEquationClicked;
         AchievementEvents.OnAnswerQuestionCorrectly -= OnAnswerQuestionCorrectly;
