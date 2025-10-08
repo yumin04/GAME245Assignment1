@@ -9,8 +9,6 @@ public class GameMediator : MonoBehaviour
     
     [SerializeField]
     private QuestionGenerator questionGenerator;
-
-    private int currScreen = 0;
     // startScreen, gameScreen (Can be Enum)
     public void Awake()
     {
