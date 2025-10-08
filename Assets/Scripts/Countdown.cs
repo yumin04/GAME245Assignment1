@@ -4,9 +4,9 @@ using UnityEngine;
 public class Countdown : MonoBehaviour
 {
     [SerializeField]
-    
     private GameMediator _gameMediator;
-    
+
+    private int _timeRemaining = 0;
 
     public void StartGameTimer()
     {
@@ -19,9 +19,9 @@ public class Countdown : MonoBehaviour
     }
     public IEnumerator RunTimer(int maximumTime)
     {
-        for (int timeRemaining = maximumTime; timeRemaining > 0; timeRemaining--)
+        for (_timeRemaining = maximumTime; _timeRemaining > 0; _timeRemaining--)
         {
-            _gameMediator.ChangeInTime(timeRemaining);
+            _gameMediator.ChangeInTime(_timeRemaining);
             yield return new WaitForSeconds(1);
         }
         _gameMediator.ChangeInTime(0);
@@ -30,6 +30,11 @@ public class Countdown : MonoBehaviour
     public void EndTimer()
     {
         StopAllCoroutines();
+    }
+
+    public int GetTimeRemaining()
+    {
+        return _timeRemaining;
     }
     public void SetMediator(GameMediator gameMediator)
     {

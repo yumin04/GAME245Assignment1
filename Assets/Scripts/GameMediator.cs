@@ -25,9 +25,14 @@ public class GameMediator : MonoBehaviour
         }
     }
 
-    public void AnswerButtonClicked(int i)
+    public void AnswerButtonClicked(int index)
     {
-        bool isCorrect = questionGenerator.CheckForCorrectAnswer(i);
+        bool isCorrect = questionGenerator.CheckForCorrectAnswer(index);
+        if (isCorrect)
+        {
+            int timeRemaining = _countdown.GetTimeRemaining();
+            AchievementEvents.OnAnswerQuestionCorrectly.Invoke(timeRemaining);
+        }
         _countdown.EndTimer();
         Game.GetInstance().ProcessAnswer(isCorrect);
     }
@@ -36,6 +41,7 @@ public class GameMediator : MonoBehaviour
     {
         UI.GetInstance().EnableCounterText();
         UI.GetInstance().DisableStartButton();
+        AchievementEvents.OnRoundStart.Invoke();
         _countdown.StartGameTimer();
     }
     public void RestartButtonClicked()
@@ -58,6 +64,7 @@ public class GameMediator : MonoBehaviour
     public void EndGame(int questionsCorrect)
     {
         UI.GetInstance().DisplayEndScreen(questionsCorrect);
+        AchievementEvents.OnRoundComplete(questionsCorrect);
     }
     public void QuitButtonClicked()
     {

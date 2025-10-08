@@ -20,8 +20,24 @@ public class AchievementProgress {
     public void IncrementProgress() {
         this.Progress++;
     }
+    
+    public void SetProgress(int amount) {
+        this.Progress = amount;
+    }
 
     public void SetCustomProgress(string progress) {
         this.CustomProgress = progress;
+    }
+
+    public override string ToString() {
+        string customProgress = this.CustomProgress;
+        if (customProgress.Length == 0) customProgress = "None";
+        return $"{Id}: IsUnlocked={IsUnlocked}, Progress={Progress}, CustomProgress={customProgress}";
+    }
+    
+    // from Tatiana Gasparre and Nathan Jones' code
+    public void ResetProgress()
+    {
+        this.Progress = 0;
     }
 }
