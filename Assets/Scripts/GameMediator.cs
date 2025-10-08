@@ -55,8 +55,8 @@ public class GameMediator : MonoBehaviour
     public void GenerateNextQuestion()
     {            
         UI.GetInstance().DisplayGameScreen();
-        (int x, int y, int answer1, int answer2, int answer3) = questionGenerator.GetNextQuestion();
-        UI.GetInstance().MoveToNextQuestion(x, y, answer1, answer2, answer3);
+        QuestionAndAnswer questionAndAnswer = questionGenerator.GenerateQuestion();
+        UI.GetInstance().MoveToNextQuestion(questionAndAnswer);
         _countdown.StartRoundTimer();
 
     }

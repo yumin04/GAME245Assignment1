@@ -117,12 +117,12 @@ public class UI : MonoBehaviour
     
 
 
-    public void MoveToNextQuestion(int x, int y, int answer1, int answer2, int answer3)
+    public void MoveToNextQuestion(QuestionAndAnswer questionAndAnswer)
     {
-        problemText.text = x + " * " + y;
-        answerChoiceOne.text = answer1 + "";
-        answerChoiceTwo.text = answer2 + "";
-        answerChoiceThree.text = answer3 + "";
+        problemText.text = questionAndAnswer.firstNumber + questionAndAnswer.operationType + questionAndAnswer.secondNumber;
+        answerChoiceOne.text = questionAndAnswer.answer1 + "";
+        answerChoiceTwo.text = questionAndAnswer.answer2 + "";
+        answerChoiceThree.text = questionAndAnswer.answer3 + "";
     }
 
     public void DisplayEndScreen(int questionsCorrect)
