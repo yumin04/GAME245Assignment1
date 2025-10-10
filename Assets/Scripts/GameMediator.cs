@@ -7,8 +7,7 @@ public class GameMediator : MonoBehaviour
     [SerializeField]
     private Countdown _countdown;
     
-    [SerializeField]
-    private QuestionGenerator questionGenerator;
+    [SerializeField] public QuestionGenerator questionGenerator;
     // startScreen, gameScreen (Can be Enum)
     public void Awake()
     {

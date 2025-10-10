@@ -1,7 +1,9 @@
 
-public class QuestionGenerator
+using UnityEngine;
+
+public class QuestionGenerator : MonoBehaviour
 {
-    private QuestionCommand _questionCommand;
+    [SerializeField] private QuestionCommand _questionCommand;
     public bool CheckForCorrectAnswer(int answerIndex)
     {
         return answerIndex == _questionCommand.GetCorrectAnswerIndex();
