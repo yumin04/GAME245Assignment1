@@ -24,7 +24,7 @@ public class UI : MonoBehaviour
 
 
     public Button startButton;
-    
+    public Button achievementButton;
     public TextMeshProUGUI startScreenCountdownText;
     public TextMeshProUGUI gameScreenCountdownText;
     
@@ -36,9 +36,16 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI resultText;
     
     
-    public void Awake()
+    private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     
     public static UI GetInstance()
@@ -62,6 +69,15 @@ public class UI : MonoBehaviour
         }
     }
 
+    public void OnClickAchievementButton()
+    {
+        _gameMediator.AchievementButtonClicked();
+    }
+
+    public void OnClickBackButton()
+    {
+        AppManager.GetInstance().LoadStartScreen();
+    }
     public void OnClickAnswerButton(int i)
     {
         _gameMediator.AnswerButtonClicked(i);
@@ -70,8 +86,15 @@ public class UI : MonoBehaviour
     public void OnClickStartButton()
     {
         DisableStartButton();
+        DisableAchievementsButton();
         _gameMediator.StartButtonClicked();
     }
+
+    private void DisableAchievementsButton()
+    {
+        achievementButton.gameObject.SetActive(false);
+    }
+
     public void OnClickQuitButton()
     {
         _gameMediator.QuitButtonClicked();

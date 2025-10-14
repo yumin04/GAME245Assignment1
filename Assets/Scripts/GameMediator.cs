@@ -9,10 +9,11 @@ public class GameMediator : MonoBehaviour
     
     [SerializeField] public QuestionGenerator questionGenerator;
     // startScreen, gameScreen (Can be Enum)
-    public void Awake()
+
+    public void Start()
     {
         UI.GetInstance().SetMediator(this);
-        _countdown.SetMediator(this);        
+        _countdown.SetMediator(this);
         Game.GetInstance().SetMediator(this);
     }
     public void ChangeInTime(int currTime)
@@ -67,6 +68,11 @@ public class GameMediator : MonoBehaviour
     }
     public void QuitButtonClicked()
     {
-        Game.GetInstance().QuitApplication();
+        AppManager.GetInstance().Quit();
+    }
+
+    public void AchievementButtonClicked()
+    {
+        AppManager.GetInstance().LoadAchievementScreen();
     }
 }

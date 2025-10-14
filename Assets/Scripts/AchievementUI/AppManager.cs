@@ -4,9 +4,25 @@ using UnityEngine.SceneManagement;
 public class AppManager : MonoBehaviour
 {
     //calling scenes
-    private string startGameSceneName = "StartGame";
-    private string quizSceneName =  "Quiz";
+    private string startGameSceneName = "GameScene";
     private string achievementSceneName = "Achievements";
+    
+    private static AppManager instance;
+    private void Awake()
+    {
+        // Singleton pattern + DontDestroyOnLoad
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+
+    public static AppManager GetInstance()
+    {
+        return instance;
+    }
+    
     
     //loading StartGame scene + function to call
     private void LoadScene(string sceneToLoad)
@@ -24,11 +40,6 @@ public class AppManager : MonoBehaviour
         LoadScene(achievementSceneName);
     }
     
-    //loading Quiz scene + function to call
-    public void LoadQuizScene()
-    {
-        LoadScene(quizSceneName);
-    }
     
     //quit application function
     public void Quit()
