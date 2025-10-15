@@ -34,6 +34,7 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI answerChoiceThree;
     
     public TextMeshProUGUI resultText;
+    public TextMeshProUGUI achievementUnlockedText;
     
     
     private void Awake()
@@ -103,6 +104,7 @@ public class UI : MonoBehaviour
     {
         DisplayStartScreen();
         DisableCounterText();
+        ResetAchievementText();
         _gameMediator.RestartButtonClicked();
     }
 
@@ -153,6 +155,16 @@ public class UI : MonoBehaviour
         currentScreen = CurrentScreen.EndScreen;
         DisplayScreen();
         resultText.text = "Result: " + questionsCorrect + " / 3";
+    }
+
+    public void ChangeAchievementText(string text)
+    {
+        achievementUnlockedText.text += "\n" + text;
+    }
+
+    public void ResetAchievementText()
+    {
+        achievementUnlockedText.text = "Achievemnt Unlocked: ";
     }
 
     public void EnableCounterText()

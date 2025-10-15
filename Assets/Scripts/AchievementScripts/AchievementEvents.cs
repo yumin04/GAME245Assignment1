@@ -12,4 +12,6 @@ public static class AchievementEvents {
     
     // this should probably actually be OnGameStart; feel free to rename.
     public static Action OnRoundStart;
+
+    public static Action<string> OnAchievementUnlocked;
 }

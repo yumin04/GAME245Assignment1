@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameMediator : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameMediator : MonoBehaviour
         UI.GetInstance().SetMediator(this);
         _countdown.SetMediator(this);
         Game.GetInstance().SetMediator(this);
+        AchievementEvents.OnAchievementUnlocked += SetAchievementText;
     }
     public void ChangeInTime(int currTime)
     {
@@ -64,7 +66,12 @@ public class GameMediator : MonoBehaviour
     public void EndGame(int questionsCorrect)
     {
         UI.GetInstance().DisplayEndScreen(questionsCorrect);
-        AchievementEvents.OnRoundComplete(questionsCorrect);
+        AchievementEvents.OnRoundComplete?.Invoke(questionsCorrect);
+    }
+
+    public void SetAchievementText(string text)
+    {
+        UI.GetInstance().ChangeAchievementText(text);
     }
     public void QuitButtonClicked()
     {

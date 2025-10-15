@@ -11,8 +11,12 @@ public class AchievementProgress {
         this.Progress = progress;
         this.CustomProgress = customProgress;
     }
-    
-    public void UnlockAchievement() { this.IsUnlocked = true; }
+
+    public void UnlockAchievement()
+    {
+        this.IsUnlocked = true;
+        AchievementEvents.OnAchievementUnlocked?.Invoke(this.Id);
+    }
     public void SetUnlocked(bool isUnlocked) {
         this.IsUnlocked = isUnlocked;
     }
