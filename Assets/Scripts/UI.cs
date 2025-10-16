@@ -164,7 +164,7 @@ public class UI : MonoBehaviour
 
     public void ResetAchievementText()
     {
-        achievementUnlockedText.text = "Achievemnt Unlocked: ";
+        achievementUnlockedText.text = "Achievement Unlocked: ";
     }
 
     public void EnableCounterText()
