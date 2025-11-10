@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-// Only Doing Multiplication
+// TODO: WHen creating fake answer, make sure the answers are not overlapping with each other.
+    // EX: if answer = 14, then fake answers should not be 14
 public class ProductQuestionCommand : QuestionCommand
 {
-    public override void  Execute()
+    public override void Execute()
     {
         int firstNumber = Random.Range(1, 13);
         int secondNumber = Random.Range(1, 13);
