@@ -1,6 +1,8 @@
 
 using UnityEngine;
 
+// TODO: Setter for QuestionCommand
+
 public class QuestionGenerator : MonoBehaviour
 { 
     private QuestionCommand _questionCommand;
