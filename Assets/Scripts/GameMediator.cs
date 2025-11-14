@@ -11,12 +11,17 @@ public class GameMediator : MonoBehaviour
     [SerializeField] public QuestionGenerator questionGenerator;
     // startScreen, gameScreen (Can be Enum)
 
+    [SerializeField] 
+    private QuestionCommand _defaultQuestionCommand;
+    
     public void Start()
     {
         UI.GetInstance().SetMediator(this);
         _countdown.SetMediator(this);
         Game.GetInstance().SetMediator(this);
         AchievementEvents.OnAchievementUnlocked += SetAchievementText;
+        
+        questionGenerator.SetQuestionCommand(_defaultQuestionCommand);
     }
     public void ChangeInTime(int currTime)
     {
