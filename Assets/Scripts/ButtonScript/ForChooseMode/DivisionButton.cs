@@ -7,9 +7,8 @@ namespace ForChooseMod
     {
         public override void OnClick()
         {
-            UI.GetInstance().OnClickAnswerButton(0);
+            UI.GetInstance().OnDifferentRoundClicked(DivisionRoundState.GetInstance());
         }
-
         public override void AddToState()
         {
             ScreenAction screenAction = new ScreenAction(4, 1, gameObject.transform.position, OnClick);

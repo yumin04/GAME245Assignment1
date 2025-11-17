@@ -13,7 +13,7 @@ namespace ForGame
 
         public override void AddToState()
         {
-            ScreenAction screenAction = new ScreenAction(1, 1, gameObject.transform.position, OnClick);
+            ScreenAction screenAction = new ScreenAction(0, 0, gameObject.transform.position, OnClick);
             GameState.GetInstance().AddScreenAction(screenAction);
         }
     }

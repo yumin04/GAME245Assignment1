@@ -8,7 +8,7 @@ namespace ForAchievements
     {
         public override void OnClick()
         {
-            UI.GetInstance().OnClickAchievementButton();
+            UI.GetInstance().OnClickBackButton();
         }
 
         public override void AddToState()

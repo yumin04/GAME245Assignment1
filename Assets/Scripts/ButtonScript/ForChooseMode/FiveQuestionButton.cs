@@ -4,7 +4,7 @@ namespace ForChooseMod
     {
         public override void OnClick()
         {
-            UI.GetInstance().OnClickAnswerButton(0);
+            UI.GetInstance().OnNumRoundsButtonClicked(3);
         }
 
         public override void AddToState()
