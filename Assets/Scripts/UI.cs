@@ -181,4 +181,14 @@ public class UI : MonoBehaviour
     {
         startButton.gameObject.SetActive(false);
     }
+
+    public void OnNumRoundsButtonClicked(int numRounds)
+    {
+        _gameMediator.SetNumRounds(numRounds);
+    }
+
+    public void OnDifferentRoundClicked(IRoundState roundState)
+    {
+        _gameMediator.SetRoundState(roundState);
+    }
 }

@@ -65,8 +65,55 @@ public class Achievements : MonoBehaviour {
     private void OnRoundComplete(int correctAnswers) {
         TrackAPlus(correctAnswers);
         TrackDailyStreak();
+        TrackPerfectRound(correctAnswers);
     }
+
+    private void TrackPerfectRound(int correctAnswers)
+    {
+        string perfectAdditionID = "PerfectAddition";
+        string perfectSubtractorID = "PerfectSubtractor";
+        string perfectMultiplierID = "PerfectMultiplier";
+        string perfectDividerID = "PerfectDivider";
+        string perfectMathID = "PerfectMath";
     
+        var state = IRoundState.Instance;
+
+        // 전체 문제 수 기준 (예: 10문제)
+        int totalQuestions = state.GetNumRounds();
+
+        if (correctAnswers != totalQuestions)
+            return;
+
+        switch (state.currentRoundType)
+        {
+            case RoundType.Addition:
+                Debug.Log("Unlocking: " + perfectAdditionID);
+                UnlockAchievement(perfectAdditionID);
+                break;
+
+            case RoundType.Subtraction:
+                Debug.Log("Unlocking: " + perfectSubtractorID);
+                UnlockAchievement(perfectSubtractorID);
+                break;
+
+            case RoundType.Multiplication:
+                Debug.Log("Unlocking: " + perfectMultiplierID);
+                UnlockAchievement(perfectMultiplierID);
+                break;
+
+            case RoundType.Division:
+                Debug.Log("Unlocking: " + perfectDividerID);
+                UnlockAchievement(perfectDividerID);
+                break;
+
+            case RoundType.All:
+                Debug.Log("Unlocking: " + perfectMathID);
+                UnlockAchievement(perfectMathID);
+                break;
+        }
+    }
+
+
     private void OnAnswerQuestionCorrectly(int timeRemaining) {
         TrackThatWasClose(timeRemaining);
         TrackMathMaster(timeRemaining);

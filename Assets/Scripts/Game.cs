@@ -9,7 +9,6 @@ public class Game : MonoBehaviour
 
     private int questionSolved = 0;
     private int questionCorrect = 0;
-    private int maximumQuestions = 3;
     public void Awake()
     {
         _instance = this;
@@ -27,7 +26,7 @@ public class Game : MonoBehaviour
 
     public void CheckIfQuestionLeft()
     {
-        if (questionSolved < maximumQuestions)
+        if (questionSolved < _gameMediator.GetNumRounds())
         {
             questionSolved++;
             _gameMediator.GenerateNextQuestion();
