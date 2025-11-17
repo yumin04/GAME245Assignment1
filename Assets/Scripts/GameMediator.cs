@@ -88,4 +88,19 @@ public class GameMediator : MonoBehaviour
     {
         AppManager.GetInstance().LoadAchievementScreen();
     }
+
+    public int GetNumRounds()
+    {
+        return IRoundState.Instance.numRounds;
+    }
+    
+    public void SetNumRounds(int numRounds)
+    {
+        IRoundState.Instance.numRounds = numRounds;
+    }
+
+    public void SetRoundState(IRoundState roundState)
+    {
+        IRoundState.Instance.SetState(roundState);
+    }
 }
