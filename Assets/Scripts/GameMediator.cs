@@ -1,3 +1,4 @@
+using QuestionGenerationScripts;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -11,8 +12,8 @@ public class GameMediator : MonoBehaviour
     [SerializeField] public QuestionGenerator questionGenerator;
     // startScreen, gameScreen (Can be Enum)
 
-    [SerializeField] 
-    private QuestionCommand _defaultQuestionCommand;
+
+    private QuestionCommand _defaultQuestionCommand = new DivisionQuestionCommand();
     
     public void Start()
     {
