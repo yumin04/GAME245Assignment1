@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ForGame
+namespace ForChooseMod
 {
-    public class AnswerOneButton : IButtonListener
+    public class AdditionButton : IButtonListener
     {
         public override void OnClick()
         {
@@ -14,7 +14,7 @@ namespace ForGame
         public override void AddToState()
         {
             ScreenAction screenAction = new ScreenAction(0, 1, gameObject.transform.position, OnClick);
-            GameState.GetInstance().AddScreenAction(screenAction);
+            ChooseModState.GetInstance().AddScreenAction(screenAction);
         }
     }
 }
