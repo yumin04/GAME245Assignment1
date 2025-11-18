@@ -3,24 +3,35 @@ using UnityEngine.InputSystem;
 
 public class UserInputActionHandler : MonoBehaviour
 {
+    public static UserInputActionHandler Instance;
     private UserInputAction inputActions;
     private IState state;
 
     [SerializeField] private GameObject indicator;
     private RectTransform indicatorRect;
     // Should we change state here?
-    private void ChangeToGameState() => state = new GameState();
-    private void ChangeToWaitState() => state = new WaitState();
-    private void ChangeToMenuState()=> state = new MenuState();
-    private void ChangeToResultState()=> state = new ResultState();
-    private void ChangeToAchievementState()=> state = new AchievementState();
-    
+
     
     private void Awake()
     {
+        // --- Singleton 설정 ---
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        // --- Input Actions 생성 ---
         inputActions = new UserInputAction();
-        indicatorRect =  indicator.GetComponent<RectTransform>();
+
+        // --- Indicator RectTransform 캐싱 ---
+        if (indicator != null)
+            indicatorRect = indicator.GetComponent<RectTransform>();
+        else
+            Debug.LogError("Indicator reference is missing in the inspector.");
     }
+
 
     private void OnEnable()
     {
@@ -75,5 +86,46 @@ public class UserInputActionHandler : MonoBehaviour
         indicatorRect.position= state.ReturnIndicatorPosition();
     }
 
+    public void ChangeToGameState()
+    {
+        state = GameState.GetInstance();
+        state.OnEnter();
+        ChangePosition();
+    }
 
+    public void ChangeToWaitState()
+    {
+        state = WaitState.GetInstance();
+        state.OnEnter();
+        ChangePosition();
+    }
+
+    public void ChangeToMenuState()
+    {
+        state = MenuState.GetInstance();
+        state.OnEnter();
+        ChangePosition();
+    }
+
+    public void ChangeToResultState()
+    {
+        state = ResultState.GetInstance();
+        state.OnEnter();
+        ChangePosition();
+    }
+
+    public void ChangeToAchievementState()
+    {
+        state = AchievementState.GetInstance();
+        state.OnEnter();
+        ChangePosition();
+    }
+
+    public void ChangeToChooseModState()
+    {
+        state = ChooseModState.GetInstance();
+        state.OnEnter();
+        ChangePosition();
+    }
+    
 }

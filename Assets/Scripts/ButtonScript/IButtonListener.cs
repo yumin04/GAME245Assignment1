@@ -13,15 +13,14 @@ public abstract class IButtonListener : MonoBehaviour
             button = gameObject.AddComponent<Button>();
         
         button.onClick.AddListener(OnClick);
-        // button.onClick.AddListener(DisableButtonWhenClicked);
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         GameEvents.OnAllButtonEnabled += AddToState;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         GameEvents.OnAllButtonEnabled -= AddToState;   
     }

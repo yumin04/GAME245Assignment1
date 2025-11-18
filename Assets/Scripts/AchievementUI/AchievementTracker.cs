@@ -14,6 +14,14 @@ public class AchievementTracker : MonoBehaviour
     public Text MathMaster;
     public Text DailyStreak;
     public Text huh;
+
+
+    public Text PerfectMath;
+    public Text PerfectAddition;
+    public Text PerfectDivider;
+    public Text PerfectSubtractor;
+    public Text PerfectMultiplier;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,6 +53,31 @@ public class AchievementTracker : MonoBehaviour
             huh.text = "1/1";
         }
         
+        if (map["PerfectMath"].IsUnlocked)
+        {
+            PerfectMath.text = "1/1";
+        }
         
+        if (map["PerfectAddition"].IsUnlocked)
+        {
+            PerfectAddition.text = "1/1";
+        }
+        
+        if (map["PerfectDivider"].IsUnlocked)
+        {
+            PerfectDivider.text = "1/1";
+        }
+        
+        if (map["PerfectSubtractor"].IsUnlocked)
+        {
+            PerfectSubtractor.text = "1/1";
+        }
+        
+        if (map["PerfectMultiplier"].IsUnlocked)
+        {
+            PerfectMultiplier.text = "1/1";
+        }
+
+
     }
 }

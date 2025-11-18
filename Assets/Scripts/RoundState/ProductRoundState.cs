@@ -1,9 +1,7 @@
-using UnityEngine;
-
 public class ProductRoundState : IRoundState
 {
     private static ProductRoundState _instance;
-
+    protected override QuestionCommand _questionCommand => new ProductQuestionCommand();
     private ProductRoundState()
     {
         currentRoundType =  RoundType.Multiplication;

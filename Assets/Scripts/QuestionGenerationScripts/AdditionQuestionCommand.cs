@@ -1,9 +1,6 @@
-// TODO: make sure the range of addition that is available will be selected properly
-// TODO: WHen creating fake answer, make sure the answers are not overlapping with each other.
-    // EX: if answer = 14, then fake answers should not be 14
-    using UnityEngine;
-    using System.Collections.Generic;
-    using System.Linq;
+using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 
 public class AdditionQuestionCommand : QuestionCommand
@@ -11,8 +8,8 @@ public class AdditionQuestionCommand : QuestionCommand
     public override void Execute()
     {
         // Pick two numbers to add
-        int firstNumber = Random.Range(0, 13);   // 0–12
-        int secondNumber = Random.Range(0, 13);  // 0–12
+        int firstNumber = Random.Range(0, 13); // 0–12
+        int secondNumber = Random.Range(0, 13); // 0–12
 
         int correctAnswer = firstNumber + secondNumber; // 0–24
 

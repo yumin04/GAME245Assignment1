@@ -13,7 +13,7 @@ namespace ForChooseMod
 
         public override void AddToState()
         {
-            ScreenAction screenAction = new ScreenAction(0, 0, gameObject.transform.position, OnClick);
+            ScreenAction screenAction = new ScreenAction(2, 0, gameObject.transform.position, OnClick);
             ChooseModState.GetInstance().AddScreenAction(screenAction);
         }
     }

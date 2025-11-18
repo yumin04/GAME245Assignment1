@@ -3,16 +3,21 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ForChooseMod
 {
-    public class ThreeQuestionButton : IButtonListener
+    public class ThreeQuestionButton : IQuestionNumberButton
     {
+        private void Start()
+        {
+            OnClick();
+        }
         public override void OnClick()
         {
+            GameEvents.OnQuestionNumberButtonClicked.Invoke(this);
             UI.GetInstance().OnNumRoundsButtonClicked(3);
         }
 
         public override void AddToState()
         {
-            ScreenAction screenAction = new ScreenAction(0, 2, gameObject.transform.position, OnClick);
+            ScreenAction screenAction = new ScreenAction(row, 0, gameObject.transform.position, OnClick);
             ChooseModState.GetInstance().AddScreenAction(screenAction);
         }
     }

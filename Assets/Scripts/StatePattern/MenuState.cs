@@ -15,4 +15,9 @@ public class MenuState : IState
         }
         return instance;
     }
+    protected override void ResetPosition()
+    {
+        rowIndex = 1;
+        columnIndex = 0;
+    }
 }

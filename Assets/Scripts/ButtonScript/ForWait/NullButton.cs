@@ -2,19 +2,19 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ForMenu
+namespace ForWait
 {
-    public class AchievementButton : IButtonListener
+    public class NullButton : IButtonListener
     {
         public override void OnClick()
         {
-            UI.GetInstance().OnClickAchievementButton();
+
         }
 
         public override void AddToState()
         {
             ScreenAction screenAction = new ScreenAction(0, 0, gameObject.transform.position, OnClick);
-            MenuState.GetInstance().AddScreenAction(screenAction);
+            WaitState.GetInstance().AddScreenAction(screenAction);
         }
     }
 }

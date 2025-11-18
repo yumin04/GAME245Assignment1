@@ -10,4 +10,9 @@ public class AchievementState : IState
         }
         return instance;
     }
+    protected override void ResetPosition()
+    {
+        rowIndex = 0;
+        columnIndex = 1;
+    }
 }

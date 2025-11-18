@@ -14,4 +14,9 @@ public class ChooseModState : IState
         }
         return instance;
     }
+    protected override void ResetPosition()
+    {
+        rowIndex = 2;
+        columnIndex = 0;
+    }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class DivisionRoundState : IRoundState
 {
     private static DivisionRoundState _instance;
-
+    protected override QuestionCommand _questionCommand => new DivisionQuestionCommand();
     private DivisionRoundState()
     {
         currentRoundType =  RoundType.Division;

@@ -21,6 +21,7 @@ public class UI : MonoBehaviour
     public GameObject startScreen;
     public GameObject gameScreen;
     public GameObject endScreen;
+    public GameObject changeModScreen;
 
 
     public Button startButton;
@@ -88,7 +89,13 @@ public class UI : MonoBehaviour
     {
         DisableStartButton();
         DisableAchievementsButton();
+        DisableChangeModScreen();
         _gameMediator.StartButtonClicked();
+    }
+
+    private void DisableChangeModScreen()
+    {
+        changeModScreen.SetActive(false);
     }
 
     private void DisableAchievementsButton()
@@ -190,5 +197,11 @@ public class UI : MonoBehaviour
     public void OnDifferentRoundClicked(IRoundState roundState)
     {
         _gameMediator.SetRoundState(roundState);
+    }
+
+    public void OnClickMenuStartButton()
+    {
+        changeModScreen.SetActive(true);
+        _gameMediator.MenuStartButtonClicked();
     }
 }

@@ -9,7 +9,7 @@ namespace ForEnd
 
         public override void AddToState()
         {
-            ScreenAction screenAction = new ScreenAction(0,3, gameObject.transform.position, OnClick);
+            ScreenAction screenAction = new ScreenAction(0,2, gameObject.transform.position, OnClick);
             ResultState.GetInstance().AddScreenAction(screenAction);
         }
     }

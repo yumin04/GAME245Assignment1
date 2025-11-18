@@ -1,4 +1,3 @@
-using QuestionGenerationScripts;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -13,16 +12,25 @@ public class GameMediator : MonoBehaviour
     // startScreen, gameScreen (Can be Enum)
 
 
-    private QuestionCommand _defaultQuestionCommand = new DivisionQuestionCommand();
+    // private QuestionCommand _defaultQuestionCommand = new DivisionQuestionCommand();
     
     public void Start()
     {
         UI.GetInstance().SetMediator(this);
         _countdown.SetMediator(this);
         Game.GetInstance().SetMediator(this);
+
+        AppManager.GetInstance().ChangeToMenuState();
+
+    }
+
+    private void OnEnable()
+    {
         AchievementEvents.OnAchievementUnlocked += SetAchievementText;
-        
-        questionGenerator.SetQuestionCommand(_defaultQuestionCommand);
+    }
+    private void OnDisable()
+    {
+        AchievementEvents.OnAchievementUnlocked -= SetAchievementText;
     }
     public void ChangeInTime(int currTime)
     {
@@ -51,6 +59,7 @@ public class GameMediator : MonoBehaviour
         UI.GetInstance().DisableStartButton();
         AchievementEvents.OnRoundStart.Invoke();
         _countdown.StartGameTimer();
+        AppManager.GetInstance().ChangeToWaitState();
     }
     public void RestartButtonClicked()
     {
@@ -65,14 +74,15 @@ public class GameMediator : MonoBehaviour
         UI.GetInstance().DisplayGameScreen();
         QuestionAndAnswer questionAndAnswer = questionGenerator.GenerateQuestion();
         UI.GetInstance().MoveToNextQuestion(questionAndAnswer);
+        AppManager.GetInstance().ChangeToGameState();
         _countdown.StartRoundTimer();
-
     }
     
     public void EndGame(int questionsCorrect)
     {
         UI.GetInstance().DisplayEndScreen(questionsCorrect);
         AchievementEvents.OnRoundComplete?.Invoke(questionsCorrect);
+        AppManager.GetInstance().ChangeToResultState();
     }
 
     public void SetAchievementText(string text)
@@ -87,6 +97,7 @@ public class GameMediator : MonoBehaviour
     public void AchievementButtonClicked()
     {
         AppManager.GetInstance().LoadAchievementScreen();
+        // AppManager.GetInstance().ChangeToAchievementState();
     }
 
     public int GetNumRounds()
@@ -102,5 +113,11 @@ public class GameMediator : MonoBehaviour
     public void SetRoundState(IRoundState roundState)
     {
         IRoundState.Instance.SetState(roundState);
+        questionGenerator.SetQuestionCommand(IRoundState.Instance.GetCurrentCommand());
+    }
+
+    public void MenuStartButtonClicked()
+    {
+        AppManager.GetInstance().ChangeToChooseModState();
     }
 }

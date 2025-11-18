@@ -1,69 +1,105 @@
-// What am I going to do for States?
-// User input
-// esc -> exit, inside IState
-// R -> restart
-// Arrow key -> moving indicator object
-// Main Action Press the action
-
-// Create ScreenAction
-
-// int x, int y for coordinate of indicator object
-    // -> then return Vector3 so indicator can move to that position
-// Vector3 variable to store
-// Action to invoke the action
-
-
-
-
-// Each State will be a singleton pattern
-
-
+using System;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public abstract class IState
 {
     private Dictionary<int, List<ScreenAction>> screenActions = new Dictionary<int, List<ScreenAction>>();
-    private int xIndex;
-    private int yIndex;
+    protected int rowIndex;
+    protected  int columnIndex;
 
-    public void AddScreenAction(ScreenAction screenAction)
+    // ---------------------------
+    // ScreenAction 등록
+    // ---------------------------
+    public void AddScreenAction(ScreenAction a)
     {
-        screenActions[screenAction.y].Insert(screenAction.x, screenAction);
+        // row가 없으면 생성
+        if (!screenActions.ContainsKey(a.row))
+            screenActions[a.row] = new List<ScreenAction>();
+
+        var row = screenActions[a.row];
+
+        // column 인덱스 크기 맞추기
+        while (row.Count <= a.column)
+            row.Add(null);
+
+        row[a.column] = a;
     }
 
+
+    // ---------------------------
+    // 이동 처리 (Dictionary 기반)
+    // ---------------------------
     public void HandleRightClicked()
     {
-        if (xIndex + 1 < screenActions[yIndex].Count)
-            xIndex++;
+        int maxCol = screenActions[rowIndex].Count - 1;
+        if (columnIndex < maxCol)
+            columnIndex++;
     }
 
     public void HandleLeftClicked()
     {
-        if (xIndex - 1 >= 0)
-            xIndex--;
+        if (columnIndex > 0)
+            columnIndex--;
     }
 
     public void HandleUpClicked()
     {
-        if (yIndex + 1 < screenActions.Count)
-            yIndex++;
+        if (rowIndex > 0)
+        {
+            rowIndex--;
+
+            // 이동한 row에서 column 범위 조정
+            int maxCol = screenActions[rowIndex].Count - 1;
+            if (columnIndex > maxCol)
+                columnIndex = maxCol;
+        }
     }
 
     public void HandleDownClicked()
     {
-        if (yIndex - 1 >= 0)
-            yIndex--;
+        int maxRow = screenActions.Count - 1;
+        if (rowIndex < maxRow)
+        {
+            rowIndex++;
+
+            // 이동한 row에서 column 범위 조정
+            int maxCol = screenActions[rowIndex].Count - 1;
+            if (columnIndex > maxCol)
+                columnIndex = maxCol;
+        }
     }
 
+
+    // ---------------------------
+    // 확정 선택 처리
+    // ---------------------------
     public void HandleConfirmClicked()
     {
-        screenActions[yIndex][xIndex].action.Invoke();
+        screenActions[rowIndex][columnIndex].action.Invoke();
     }
 
+
+    // ---------------------------
+    // indicator 위치 반환
+    // ---------------------------
     public Vector2 ReturnIndicatorPosition()
     {
-        return screenActions[xIndex][yIndex].pos;
+        return screenActions[rowIndex][columnIndex].pos;
+    }
+
+
+    // ---------------------------
+    // State 진입
+    // ---------------------------
+    public virtual void OnEnter()
+    {
+        GameEvents.OnAllButtonEnabled?.Invoke();
+        ResetPosition(); 
+    }
+    protected virtual void ResetPosition()
+    {
+        rowIndex = 0;
+        columnIndex = 0;
     }
 }

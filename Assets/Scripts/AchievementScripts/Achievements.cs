@@ -77,8 +77,7 @@ public class Achievements : MonoBehaviour {
         string perfectMathID = "PerfectMath";
     
         var state = IRoundState.Instance;
-
-        // 전체 문제 수 기준 (예: 10문제)
+        
         int totalQuestions = state.GetNumRounds();
 
         if (correctAnswers != totalQuestions)

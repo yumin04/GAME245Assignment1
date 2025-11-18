@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+
 public enum RoundType {
     Addition,
     Subtraction,
@@ -9,10 +11,12 @@ public enum RoundType {
 
 public abstract class IRoundState
 {
-    public static IRoundState Instance;
-
+    // Instantiating ProductRoundState as default
+    public static IRoundState Instance = ProductRoundState.GetInstance();
+    
     public int numRounds;
     public RoundType currentRoundType { get; set; }
+    protected abstract QuestionCommand _questionCommand { get; }
 
     public int GetNumRounds() => numRounds;
 
@@ -22,4 +26,8 @@ public abstract class IRoundState
     }
 
     // public abstract void HandleOnRoundEnd(int correctAnswers);
+    public QuestionCommand GetCurrentCommand()
+    {
+        return _questionCommand;
+    }
 }
